@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"runtime"
 	"strconv"
 	"time"
 )
@@ -34,7 +35,16 @@ func main() {
 	}
 	file.Write([]byte(content))
 
-	err = exec.Command("open", fileName).Run()
+	openCmd := ""
+	switch runtime.GOOS {
+	case "darwin":
+		openCmd = "open"
+	case "linux":
+		openCmd = "xdg-open"
+	case "windows":
+		openCmd = "start"
+	}
+	err = exec.Command(openCmd, fileName).Run()
 	if err != nil {
 		log.Printf("failed to run open command!")
 	}
