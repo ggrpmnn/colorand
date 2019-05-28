@@ -50,7 +50,7 @@ func main() {
 	}
 
 	// sleep to prevent file from being deleted too early
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	err = os.Remove(fileName)
 	if err != nil {
