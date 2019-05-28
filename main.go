@@ -49,6 +49,9 @@ func main() {
 		log.Printf("failed to run open command!")
 	}
 
+	// sleep to prevent file from being deleted too early
+	time.Sleep(5 * time.Second)
+
 	err = os.Remove(fileName)
 	if err != nil {
 		log.Printf("failed to remove temp file!")
